@@ -7,10 +7,10 @@ class cliente:
 
 
     def get_codigo(self):
-        return self._codigo
+        return self.codigo
 
     def get_nome(self):
-        return self._nome
+        return self.nome
     
     def get_saldo(self):
         return self.saldo
