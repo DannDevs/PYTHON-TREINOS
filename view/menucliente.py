@@ -1,0 +1,57 @@
+import controller.clientecontroller as clientecontroller
+
+
+def menucliente():
+   opcao = -1
+   
+   while opcao != 0:
+
+    print("======")
+    print("1 - Cadastar")
+    print("2 - Exibir")
+    print("3 - Remover")
+    print("======")     
+
+    try:
+      opcao = int(input("Digite a Opçao: "))
+    except:
+      print("Opçao invalida!")   
+      continue
+
+    match opcao:
+        case 1:
+            try:
+                codigo = int(input('Digite o codigo: '))
+                nome = input('Digite o nome: ')
+                saldo = int(input('Digite o saldo: '))
+                tipo = input('Digite o tipo: ')
+
+                clientecontroller.cadastrarc(codigo,nome,saldo,tipo)
+            except:
+                print("Opçao invalida")
+                break
+        case 2:
+            clientecontroller.exibir()
+        case 3:
+            codigo = int(input('Digite o codigo do cliente a remover: '))
+            clientecontroller.excluir(codigo)
+          
+
+     
+
+
+
+
+
+
+
+
+
+
+
+   
+
+
+
+
+

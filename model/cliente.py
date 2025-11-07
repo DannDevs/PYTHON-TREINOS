@@ -1,7 +1,8 @@
-class cliente:
+from model.pessoa import pessoa
+
+class cliente(pessoa):
     def __init__(self,codigo,nome,saldo,tipo):
-        self.codigo = codigo
-        self.nome = nome
+        super().__init__(codigo,nome)
         self.saldo = saldo
         self.tipo = tipo
 

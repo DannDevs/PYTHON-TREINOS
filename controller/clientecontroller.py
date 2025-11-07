@@ -1,8 +1,8 @@
 from model.cliente import cliente
-from model.funcionario import funcionario
+
 
 clientes = []
-funcionarios = []
+
 
 
 def cadastrarc(codigo,nome,saldo,tipo):
@@ -16,20 +16,11 @@ def cadastrarc(codigo,nome,saldo,tipo):
 
     print("Cliente Cadastrado com sucesso!")
 
-def cadastrarf(codigo,nome,salario,tipo):
-    
-    if validacodfun(codigo) == True:
-        print("Codigo ja foi cadastrado!")
-        return
-
-    novofuncionario = funcionario(codigo,nome,salario,tipo)
-    funcionarios.append(novofuncionario)
-
-    print("Funcionario Cadastrado com sucesso")
 
 def exibir():
     if not clientes:
         print("Nao existe Clientes cadastrados!!")
+        return
 
     for c in clientes:
         print("====")
@@ -37,6 +28,21 @@ def exibir():
         print(f"Nome: {c.get_nome()}")
         print(f"Saldo: {c.get_saldo()}")
         print("====")
+
+def excluir(codigo):
+    
+    if not validacodcli(codigo):
+        print("Codigo Nao esta no sistema")
+        return
+    clienteexistente =  None
+
+
+    for c in clientes:
+        if codigo == c.codigo:
+            clienteexistente = c
+
+    clientes.remove(clienteexistente)      
+    print("Cliente removido com sucesso")
 
 def vender(cliente,valor):
     if cliente.get_saldo() > valor:
@@ -50,9 +56,5 @@ def validacodcli(codigo):
             return True
     return False
 
-def validacodfun(codigo):
-    for f in funcionario:
-        if f.codigo == codigo:
-            return True
-    return False    
+ 
     
