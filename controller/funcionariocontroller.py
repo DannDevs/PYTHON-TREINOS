@@ -1,5 +1,5 @@
 from model.funcionario import funcionario
-
+from . import clientecontroller as clicontroller
 
 funcionarios = []
 
@@ -14,6 +14,10 @@ def cadastrarf(codigo,nome,salario,cargo):
 
     print("Funcionario Cadastrado com sucesso")
 
+
+
+
+
 def exibir():
 
     if not funcionarios:
@@ -23,10 +27,10 @@ def exibir():
         for f in funcionarios:
             
             print("=======")
-            print(f"Codigo:  {f.get_codigo()}" )
-            print(f"Nome:  {f.get_nome()} " )
-            print(f"Cargo: {f.get_cargo()}"  )
-            print(f"Salario: {f.get_salario()}" )
+            print(f"Codigo:  {f.codigo}" )
+            print(f"Nome:  {f.nome} " )
+            print(f"Cargo: {f.cargo}"  )
+            print(f"Salario: {f.salario}" )
             print("=======")
 
 def validacodfun(codigo):
@@ -34,3 +38,6 @@ def validacodfun(codigo):
         if f.codigo == codigo:
             return True
     return False   
+
+
+

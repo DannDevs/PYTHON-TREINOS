@@ -10,6 +10,7 @@ def menucliente():
     print("1 - Cadastar")
     print("2 - Exibir")
     print("3 - Remover")
+    print("0 - Voltar")
     print("======")     
 
     try:
@@ -24,9 +25,8 @@ def menucliente():
                 codigo = int(input('Digite o codigo: '))
                 nome = input('Digite o nome: ')
                 saldo = int(input('Digite o saldo: '))
-                tipo = input('Digite o tipo: ')
 
-                clientecontroller.cadastrarc(codigo,nome,saldo,tipo)
+                clientecontroller.cadastrarc(codigo,nome,saldo)
             except:
                 print("Opçao invalida")
                 break

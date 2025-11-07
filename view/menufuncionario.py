@@ -1,4 +1,5 @@
 import controller.funcionariocontroller as funcionariocontroller
+import controller.vendacontroller as vendacontroller
 
 def menufuncionario():
     opcao = -1
@@ -9,6 +10,7 @@ def menufuncionario():
         print("1 -  Cadastar Funcionario")
         print("2 -  Exibir Funcionario")
         print("3 -  Vender")
+        print("0 - Voltar")
         print("======")
 
         try:
@@ -27,5 +29,11 @@ def menufuncionario():
                 funcionariocontroller.cadastrarf(codigo,nome,salario,cargo)
                 
             case 2: funcionariocontroller.exibir()
-            case 3: funcionariocontroller.vender()
+            case 3: 
+                codigo = int(input('Digite o codigo da venda: '))
+                valor = int(input('Digite o valor: '))
+                codcliente = int(input('Digite o codigo do cliente: '))
+                codfuncionario = int(input('Digite o codigo do cliente: '))
+        
+                vendacontroller.vender(codigo,valor,codcliente,codfuncionario)
     

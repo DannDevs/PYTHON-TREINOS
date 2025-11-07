@@ -5,13 +5,13 @@ clientes = []
 
 
 
-def cadastrarc(codigo,nome,saldo,tipo):
+def cadastrarc(codigo,nome,saldo):
 
     if validacodcli(codigo) == True :
         print("Cod ja existe!") 
         return;
 
-    novocliente = cliente(codigo,nome,saldo,tipo)
+    novocliente = cliente(codigo,nome,saldo)
     clientes.append(novocliente)
 
     print("Cliente Cadastrado com sucesso!")
@@ -24,9 +24,9 @@ def exibir():
 
     for c in clientes:
         print("====")
-        print(f"Codigo: {c.get_codigo()}")
-        print(f"Nome: {c.get_nome()}")
-        print(f"Saldo: {c.get_saldo()}")
+        print(f"Codigo: {c.codigo}")
+        print(f"Nome: {c.nome}")
+        print(f"Saldo: {c.saldo}")
         print("====")
 
 def excluir(codigo):
@@ -43,12 +43,6 @@ def excluir(codigo):
 
     clientes.remove(clienteexistente)      
     print("Cliente removido com sucesso")
-
-def vender(cliente,valor):
-    if cliente.get_saldo() > valor:
-        print("Venda Realizada")
-        novo_saldo = cliente.get_saldo() - valor
-        cliente.set_saldo() == novo_saldo
 
 def validacodcli(codigo):
     for c in clientes:
