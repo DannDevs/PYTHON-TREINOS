@@ -1,9 +1,9 @@
 from model.cliente import cliente
-
+from dao.clientedao import clientedao
 
 clientes = []
 
-
+dao =  clientedao()
 
 def cadastrarc(codigo,nome,saldo):
 
@@ -12,10 +12,7 @@ def cadastrarc(codigo,nome,saldo):
         return;
 
     novocliente = cliente(codigo,nome,saldo)
-    clientes.append(novocliente)
-
-    print("Cliente Cadastrado com sucesso!")
-
+    dao.inserir(novocliente)
 
 def exibir():
     if not clientes:

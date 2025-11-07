@@ -1,13 +1,13 @@
-import psycopg2
+import mysql.connector
 
-class conexao:
-    def __init__(self):
-        self.conn = psycopg2.connect(
-            host ="192.168.200.171",
-            database ="dbloja",
-            user ="admin",
-            password ="miRRor10"
+
+def obter_conexao():
+    conexao = mysql.connector.connect(
+        host="127.0.0.1",
+        port=3306,
+        user="root",
+        password="",
+        database="dbloja"
         )
 
-        self.con.autocommit = True
-        self.cur = self.con.cursor()
+    return conexao

@@ -21,15 +21,12 @@ def menucliente():
 
     match opcao:
         case 1:
-            try:
                 codigo = int(input('Digite o codigo: '))
                 nome = input('Digite o nome: ')
                 saldo = int(input('Digite o saldo: '))
 
                 clientecontroller.cadastrarc(codigo,nome,saldo)
-            except:
-                print("Opçao invalida")
-                break
+       
         case 2:
             clientecontroller.exibir()
         case 3:
