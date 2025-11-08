@@ -1,5 +1,8 @@
 from model.funcionario import funcionario
 from . import clientecontroller as clicontroller
+from dao.funcionariodao import funcionariodao
+
+dao = funcionariodao()
 
 funcionarios = []
 
@@ -10,15 +13,11 @@ def cadastrarf(codigo,nome,salario,cargo):
         return
 
     novofuncionario = funcionario(codigo,nome,salario,cargo)
-    funcionarios.append(novofuncionario)
-
-    print("Funcionario Cadastrado com sucesso")
-
-
-
-
+    dao.inserir(novofuncionario)
 
 def exibir():
+
+    atualizarlista()
 
     if not funcionarios:
         print("A lista de funcionarios esta vazia")
@@ -38,6 +37,13 @@ def validacodfun(codigo):
         if f.codigo == codigo:
             return True
     return False   
+def atualizarlista():
+    resultados = dao.listar()
+    funcionarios.clear()
+    
+    for f in resultados:
+        funcionarios.append(f)
+        
 
 
 

@@ -15,37 +15,50 @@ def cadastrarc(codigo,nome,saldo):
     dao.inserir(novocliente)
 
 def exibir():
-    if not clientes:
-        print("Nao existe Clientes cadastrados!!")
-        return
+    atualizalista()
 
     for c in clientes:
-        print("====")
+        print("======")
         print(f"Codigo: {c.codigo}")
         print(f"Nome: {c.nome}")
-        print(f"Saldo: {c.saldo}")
-        print("====")
+        print(f"saldo: {c.saldo}")
+        print("======")
 
 def excluir(codigo):
     
+    atualizalista()
+
     if not validacodcli(codigo):
         print("Codigo Nao esta no sistema")
         return
     clienteexistente =  None
 
-
     for c in clientes:
         if codigo == c.codigo:
             clienteexistente = c
+    
+    dao.excluir(clienteexistente)
+   
 
-    clientes.remove(clienteexistente)      
-    print("Cliente removido com sucesso")
 
 def validacodcli(codigo):
     for c in clientes:
         if c.codigo == codigo:
             return True
     return False
+
+
+def atualizalista():
+
+    clientesatualizados = dao.listar()
+    clientes.clear()
+
+    for c in clientesatualizados:
+        clientes.append(c)
+    
+
+    
+
 
  
     
