@@ -33,6 +33,8 @@ def exibir():
             print("=======")
 
 def validacodfun(codigo):
+    atualizarlista()
+    
     for f in funcionarios:
         if f.codigo == codigo:
             return True

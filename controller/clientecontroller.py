@@ -42,6 +42,7 @@ def excluir(codigo):
 
 
 def validacodcli(codigo):
+    atualizalista()
     for c in clientes:
         if c.codigo == codigo:
             return True

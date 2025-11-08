@@ -1,11 +1,17 @@
 from model.venda import venda
 from . import clientecontroller as clicontroller
 from . import funcionariocontroller as funccontroller
+from dao.vendadao import vendadao
+
+dao = vendadao()
 
 
 vendas = []
 
 def vender(codigo,valor,cliente,funcionario):
+    
+    atualizarlista()
+
     for c in clicontroller.clientes:
         if cliente == c.codigo:
             clienteexistente = c
@@ -32,4 +38,11 @@ def vender(codigo,valor,cliente,funcionario):
             return
     else:
         print("O Funcionario nao está no sistema")
+def atualizarlista():
+
+    vendaatualizadas = dao.listar()
+    vendas.clear()
+
+    for v in vendaatualizadas:
+        vendas.append(v)
        

@@ -19,7 +19,7 @@ class clientedao:
             print("Cliente Inserido com sucesso")
 
         except mysql.connector.Error as erro:
-            print("Erro ao Inserir" + erro)
+            print(f"Erro ao Inserir {erro}")
         
         finally:
             if cursor:
