@@ -42,6 +42,7 @@ class vendadao:
                 vendas.append(f)
 
             return vendas
+        
         except mysql.connector.Error as erro:
             print(f"Erro ao listar: {erro}")
             

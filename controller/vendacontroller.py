@@ -11,6 +11,7 @@ vendas = []
 def vender(codigo,valor,cliente,funcionario):
     
     atualizarlista()
+    clicontroller.atualizalista()
 
     for c in clicontroller.clientes:
         if cliente == c.codigo:
@@ -27,10 +28,10 @@ def vender(codigo,valor,cliente,funcionario):
     if funccontroller.validacodfun(novavenda.funcionario.codigo) == True:
         if clicontroller.validacodcli(novavenda.cliente.codigo) == True:
             if novavenda.cliente.saldo >= novavenda.valor:
+
                 valorsaldoposvenda = novavenda.cliente.saldo - novavenda.valor
                 novavenda.cliente.saldo = valorsaldoposvenda
-                vendas.append(novavenda)
-                print("Venda Realizada com sucesso")
+                dao.inserir(novavenda)
             else:
                 print("Saldo Insuficiente para a compra")
         else:
@@ -38,6 +39,17 @@ def vender(codigo,valor,cliente,funcionario):
             return
     else:
         print("O Funcionario nao está no sistema")
+
+def emitirrelatorio():
+
+    atualizarlista()
+    
+    if not vendas:
+        print("Nao há vendas a exibir")
+        return
+    
+
+
 def atualizarlista():
 
     vendaatualizadas = dao.listar()
@@ -45,4 +57,6 @@ def atualizarlista():
 
     for v in vendaatualizadas:
         vendas.append(v)
+
+
        

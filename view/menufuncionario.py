@@ -10,6 +10,7 @@ def menufuncionario():
         print("1 -  Cadastar Funcionario")
         print("2 -  Exibir Funcionario")
         print("3 -  Vender")
+        print("4 - Emitir Relatorio")
         print("0 - Voltar")
         print("======")
 
@@ -36,4 +37,6 @@ def menufuncionario():
                 codfuncionario = int(input('Digite o codigo do cliente: '))
         
                 vendacontroller.vender(codigo,valor,codcliente,codfuncionario)
+            case 4:
+                vendacontroller.emitirrelatorio()
     
