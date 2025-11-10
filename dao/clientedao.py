@@ -77,6 +77,21 @@ class clientedao:
                 conexao.close()
             if cursor:
                 cursor.close()
+    
+    def atualizarsaldo(self,saldo):
+        try:
+            conexao = obter_conexao()
+            cursor = conexao.cursor()
+
+            sql = "INSERT INTO cliente(saldo) VALUES (%s)"
+
+
+        except:
+            pass
+        finally:
+            pass
+
+    
 
 
            
