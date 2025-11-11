@@ -1,8 +1,28 @@
 from dao.conexao import obter_conexao
 from model.cliente import cliente
-import mysql.connector
+# import mysql.connector
+import psycopg2
 
 class clientedao:
+
+
+    def atualizarsaldo(self,cliente,saldo,valor):
+        try:
+            conexao = obter_conexao()
+            cursor = conexao.cursor()
+
+            sql = "UPDATE cliente SET saldo = (%s) WHERE codigo = (%s)"
+            saldoatual = saldo - valor
+
+            valores = (saldoatual,cliente)
+            cursor.execute(sql,valores)
+
+            conexao.commit()
+
+        except psycopg2.Error as erro:
+            print(f"Erro ao Atualizar{erro}")
+        finally:
+            pass
 
     def inserir(self,cliente):
         try:
@@ -18,7 +38,7 @@ class clientedao:
 
             print("Cliente Inserido com sucesso")
 
-        except mysql.connector.Error as erro:
+        except psycopg2.Error as erro:
             print(f"Erro ao Inserir {erro}")
         
         finally:
@@ -46,8 +66,8 @@ class clientedao:
             return clientes
                 
 
-        except mysql.connector.Error as erro:
-            print(f"Erro na consultar")
+        except psycopg2.Error as erro:
+            print(f"Erro na consultar: {erro}")
             return []
         finally:
             if cursor:
@@ -68,7 +88,7 @@ class clientedao:
         
             print("Cliente deletado com sucesso")
 
-        except mysql.connector.Error as error:
+        except psycopg2.Error as error:
         
             print(f"Erro ao excluir: {error}")
         
@@ -77,20 +97,6 @@ class clientedao:
                 conexao.close()
             if cursor:
                 cursor.close()
-    
-    def atualizarsaldo(self,saldo):
-        try:
-            conexao = obter_conexao()
-            cursor = conexao.cursor()
-
-            sql = "INSERT INTO cliente(saldo) VALUES (%s)"
-
-
-        except:
-            pass
-        finally:
-            pass
-
     
 
 

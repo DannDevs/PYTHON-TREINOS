@@ -1,8 +1,10 @@
 from model.venda import venda
 from dao.conexao import obter_conexao
-import mysql.connector
+from dao.clientedao import clientedao
+# import mysql.connector
+import psycopg2
 
-
+dao = clientedao()
 
 class vendadao:
     def inserir(self,venda):
@@ -11,14 +13,15 @@ class vendadao:
             cursor = conexao.cursor()
 
             sql = "INSERT INTO venda(codigo,valor,fkcliente,fkfuncionario) VALUES(%s,%s,%s,%s)"
-            valores = (venda.codigo,venda.valor,venda.fkcliente,venda.fkfuncionario)
+            valores = (venda.codigo, venda.valor, venda.cliente.codigo, venda.funcionario.codigo)
 
             cursor.execute(sql,valores)
+            dao.atualizarsaldo(venda.cliente.codigo, venda.cliente.saldo, venda.valor)
             
+            conexao.commit()
             print("Venda Gravada com Sucesso")
 
-
-        except mysql.connector.Error as erro:
+        except psycopg2.Error as erro:
             print(f"Erro ao inserir venda: {erro}")
         finally:
             if conexao:
@@ -43,7 +46,7 @@ class vendadao:
 
             return vendas
         
-        except mysql.connector.Error as erro:
+        except psycopg2.Error as erro:
             print(f"Erro ao listar: {erro}")
             
         finally:

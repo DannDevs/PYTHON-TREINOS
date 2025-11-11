@@ -1,6 +1,7 @@
 from model.funcionario import funcionario
 from dao.conexao import obter_conexao
-import mysql.connector
+# import mysql.connector
+import psycopg2
 
 
 class funcionariodao:
@@ -16,7 +17,7 @@ class funcionariodao:
             conexao.commit()
             print("Funcionario inserido com sucesso")
 
-        except mysql.connector.Error as error:
+        except psycopg2.Error as error:
             print(f"Erro ao inserir {error}")
         finally:
             if conexao:
@@ -40,7 +41,7 @@ class funcionariodao:
                 funcionarios.append(f)
 
             return funcionarios
-        except mysql.connector.Error as error:
+        except psycopg2.Error as error:
             print(f"Erro ao listar: {error}")
         finally:
             if conexao:

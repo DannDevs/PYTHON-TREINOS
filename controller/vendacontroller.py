@@ -12,41 +12,63 @@ def vender(codigo,valor,cliente,funcionario):
     
     atualizarlista()
     clicontroller.atualizalista()
+    funccontroller.atualizarlista()
 
-    for c in clicontroller.clientes:
-        if cliente == c.codigo:
-            clienteexistente = c
+    if validarcodvenda(codigo):
+        print("Codigo venda ja existe")
+        return
 
-    for f in funccontroller.funcionarios:
-        if funcionario == f.codigo:
-            funcionarioexistente = f
+    if funccontroller.validacodfun(cliente) == True:
+        if clicontroller.validacodcli(funcionario) == True:
 
-    
-    novavenda = venda(codigo,valor,clienteexistente,funcionarioexistente)        
+            for c in clicontroller.clientes:
+                if cliente == c.codigo:
+                    clienteexistente = c
 
+            for f in funccontroller.funcionarios:
+                if funcionario == f.codigo:
+                    funcionarioexistente = f
+        
+            novavenda = venda(codigo,valor,clienteexistente,funcionarioexistente)        
 
-    if funccontroller.validacodfun(novavenda.funcionario.codigo) == True:
-        if clicontroller.validacodcli(novavenda.cliente.codigo) == True:
-            if novavenda.cliente.saldo >= novavenda.valor:
+            if clienteexistente.saldo >= novavenda.valor:
 
-                valorsaldoposvenda = novavenda.cliente.saldo - novavenda.valor
-                novavenda.cliente.saldo = valorsaldoposvenda
-                dao.inserir(novavenda)
+                    valorsaldoposvenda = clienteexistente.saldo - novavenda.valor
+                    clienteexistente.saldo = valorsaldoposvenda
+                    dao.inserir(novavenda)
             else:
                 print("Saldo Insuficiente para a compra")
+                return
         else:
             print("Cliente não está cadastrado")
             return
     else:
         print("O Funcionario nao está no sistema")
+        return
 
 def emitirrelatorio():
-
-    atualizarlista()
     
+    atualizarlista()
     if not vendas:
         print("Nao há vendas a exibir")
         return
+    
+    for v in vendas:
+        print("======")
+        print(f"Codigo: {v.codigo}")
+        print(f"Valor: {v.valor}")
+        print(f"Cliente: {v.cliente}")
+        print(f"Funcionario: {v.funcionario}")
+        print("======")
+
+
+def validarcodvenda(codigo):
+    
+    atualizarlista()
+    for v in vendas:
+        if v.codigo == codigo:
+            return True
+    return False
     
 
 
